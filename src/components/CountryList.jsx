@@ -1,17 +1,14 @@
-import Spinner from "./Spinner";
 import styles from "./CountryList.module.css";
-import CountryItem from "./CountryItem";
+import Spinner from "./Spinner";
 import Message from "./Message";
-import { useCities } from "../contexts/CitiesContext";
+import CountryItem from "./CountryItem";
 
-function CountryList() {
-  const { cities, isLoading } = useCities();
-
+function CountriesList({ cities, isLoading }) {
   if (isLoading) return <Spinner />;
 
   if (!cities.length)
     return (
-      <Message message="Add your first city by clicking on a city on the map" />
+      <Message message="Add your first country by clicking on a country on the map" />
     );
 
   const countries = cities.reduce((arr, city) => {
@@ -23,10 +20,10 @@ function CountryList() {
   return (
     <ul className={styles.countryList}>
       {countries.map((country) => (
-        <CountryItem country={country} key={country.country} />
+        <CountryItem country={country} />
       ))}
     </ul>
   );
 }
 
-export default CountryList;
+export default CountriesList;
